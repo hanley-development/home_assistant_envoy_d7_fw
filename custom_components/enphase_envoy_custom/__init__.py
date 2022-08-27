@@ -76,9 +76,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                             battery_sum += battery.get("percentFull", 0)
                         try:
                             data[description.key] = round(battery_sum / len(battery_data), 2)
-                        except Exception as e:
-                            print(e.message)
-                            
+                        except:
+                            pass
+                        finally:
+                            print("Ignored")
+
                 elif description.key == "current_battery_capacity":
                     battery_data = await envoy_reader.battery_storage()
                     if isinstance(battery_data, list):
