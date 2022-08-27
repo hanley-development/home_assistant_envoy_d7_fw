@@ -80,7 +80,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                             pass
                         finally:
                             print("Ignored")
-
+                        except Exception as e:
+                            print(e.message)
+             
                 elif description.key == "current_battery_capacity":
                     battery_data = await envoy_reader.battery_storage()
                     if isinstance(battery_data, list):
